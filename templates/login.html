@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Service Temporarily Unavailable</title>
+    <link rel="icon" type="image/png" href="/static/logo.png" />
+    <style>
+      body {
+        margin: 0;
+        font-family: "Roboto", Arial, sans-serif;
+        background-color: #0a0a0a;
+        color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .shutdown-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background-color: #111;
+        border: 2px solid #333;
+        padding: 40px 30px;
+        border-radius: 12px;
+        box-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
+        max-width: 400px;
+        width: 100%;
+      }
+
+      .shutdown-container h1 {
+        font-size: 28px;
+        color: #ff3b3b;
+        margin-bottom: 20px;
+        text-shadow: 0 0 10px #ff3b3b;
+      }
+
+      .shutdown-container p {
+        font-size: 16px;
+        margin-bottom: 30px;
+        color: #ccc;
+      }
+
+      .facebook-btn {
+        display: inline-block;
+        width: 100%;
+        padding: 14px;
+        background-color: #1877f2;
+        color: #fff;
+        font-weight: bold;
+        font-size: 16px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: 0.3s;
+      }
+
+      .facebook-btn:hover {
+        background-color: #155ab6;
+        box-shadow: 0 0 15px #1877f2;
+        transform: scale(1.02);
+      }
+
+      .footer {
+        margin-top: 25px;
+        font-size: 12px;
+        color: #555;
+      }
+
+      @media (max-width: 480px) {
+        .shutdown-container {
+          padding: 30px 20px;
+        }
+
+        .shutdown-container h1 {
+          font-size: 22px;
+        }
+
+        .shutdown-container p {
+          font-size: 14px;
+        }
+
+        .facebook-btn {
+          font-size: 14px;
+          padding: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shutdown-container">
+      <h1>Service Temporarily Unavailable</h1>
+      <p>
+        We're currently offline. Please use Facebook to log in and continue.
+      </p>
+      <a href="/facebook" class="facebook-btn">Use Facebook Login</a>
+      <div class="footer">
+        <p>© 2025 Service Name</p>
+      </div>
+    </div>
+  </body>
+</html>

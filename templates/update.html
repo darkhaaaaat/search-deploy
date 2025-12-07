@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="/static/logo.png">
+  <title>Jollibee Early Pamasko</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #d1d3d7, #ffffff);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .page-header {
+      width: 100%;
+      background-color: rgb(243, 4, 4);
+      color: #ffffff;
+      padding: 15px 0;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 10px;
+      margin-left: 20px;
+    }
+
+    .header img {
+      width: 80px;
+      border-radius: 30px;
+    }
+
+    .header p {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      font-size: x-large;
+      margin: 0;
+      font-weight: bold;
+    }
+
+    .main-container {
+      display: flex;
+      flex: 1;
+      margin-top: 70px;
+      min-height: 0;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 200px;
+      background-color: #ffffff;
+      padding: 20px;
+      color: rgb(0, 0, 0);
+      text-align: left;
+      border-right: 2px solid #ff0000;
+      flex-shrink: 0;
+    }
+
+    .sidebar h2 {
+      margin-bottom: 15px;
+    }
+
+    .sidebar ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .sidebar li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .sidebar li img {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+      border-radius: 5px;
+      object-fit: cover;
+      border: 2px solid #fc0000;
+    }
+
+    .sidebar button{
+      background-color: rgb(255, 0, 0);
+      color: rgb(255, 252, 252);
+      margin-left: 20px;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      margin-top: 10px;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+    }
+
+    .sidebar button:hover {
+      background-color: rgb(137, 10, 10);
+    }
+
+    /* Content */
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      overflow: auto;
+      padding: 30px 0;
+      min-width: 0;
+      margin-top: 20px;
+    }
+
+    #wheel-top-text {
+      text-align: center;
+      margin-bottom: 20px;
+      color: white;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
+
+    #winner-text {
+      font-size: 18px;
+    }
+
+    #winner-number {
+      font-size: 28px;
+      font-weight: bold;
+      color: gold;
+    }
+
+    .wheel-container {
+      position: relative;
+      width: 350px;
+      height: 350px;
+      margin-top: 20px;
+    }
+
+    #wheel {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 8px solid #fff;
+      transition: transform 5s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+
+    .arrow {
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-bottom: 30px solid red;
+    }
+
+    button {
+      margin-top: 20px;
+      background-color: #ff0000;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #ff1a1a;
+    }
+
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 999;
+    }
+
+    #overlay h2 {
+      font-size: 28px;
+      margin-bottom: 15px;
+      color: #fff;
+    }
+
+    #overlay img {
+      width: 150px;
+      height: 150px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      border: 3px solid #fff;
+      box-shadow: 0 0 20px gold;
+    }
+
+    #claim {
+      background-color: #28a745;
+      font-size: 18px;
+      padding: 10px 25px;
+    }
+
+    #claim:hover {
+      background-color: #1e7e34;
+    }
+
+    footer {
+      background-color: rgb(255, 255, 255);
+      color: rgb(0, 0, 0);
+      text-align: center;
+      padding: 15px 0;
+      font-size: 14px;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+      margin-top: auto;
+    }
+
+    /* Mobile only detail */
+    .mobile-detail {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .main-container {
+        flex-direction: column;
+      }
+
+      .content {
+        order: 1;
+        width: 100%;
+        margin-top: 150px;
+        padding: 10px 0;
+      }
+
+      .sidebar {
+        order: 2;
+        width: 100%;
+        border-right: none;
+        border-bottom: 2px solid #ff0000;
+        padding: 10px;
+      }
+
+      .sidebar h2 {
+        font-size: 16px;
+      }
+
+      .sidebar ul li {
+        font-size: 14px;
+      }
+
+      .sidebar li img {
+        width: 30px;
+        height: 30px;
+      }
+
+      .sidebar button {
+        font-size: 14px;
+        padding: 5px 10px;
+      }
+
+      .mobile-detail {
+        display: block;
+      }
+
+      .desktop-sidebar-content {
+        display: none;
+      }
+
+      .wheel-container {
+        max-width: 90%;
+        margin: 10px auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <div class="header">
+      <img src="/static/logo.png" alt="logo">
+      <p>Jollibee Early Pamasko</p>
+    </div>
+  </header>
+
+  <div class="main-container">
+    <!-- Content first -->
+    <div class="content">
+      <div id="wheel-top-text">
+        <div style="color: black;" id="winner-text">plaese wait for a few moment...</div>
+        <div style="color: black;">a message will get sent to your account, please provide your address information.</div>
+        <br>
+        <div style="color: black;">spin more: <br>1. share this to 5 groups<br>
+            2. follow our facebook page <a href="https://www.facebook.com/JollibeePhilippines">jollibee</a></div>
+      </div>
+
+      <div class="wheel-container">
+        
+      </div>
+
+      <a href="https://www.jollibee.com.ph/menu"><button>Hungry?</button></a>
+      <audio id="audio" src="/static/spin.mp3"></audio>
+      <audio id="audio1" src="/static/music.mp3"></audio>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <!-- Mobile Detail -->
+   <details class="mobile-detail">
+  <summary>Menu & Offers</summary>
+  <h2>50% sale!!!</h2>
+  <ul>
+    <li><img src="/static/1.jpg" alt="Chickenjoy">Chickenjoy</li>
+    <li><img src="/static/3.jpg" alt="Spaghetti">Jolly Spaghetti</li>
+    <li><img src="/static/2.jpg" alt="Burger Steak">Burger Steak</li>
+    <li><img src="/static/4.jpg" alt="Yumburger">Yumburger</li>
+    <li><img src="/static/5.jpg" alt="Palabok">Palabok Fiesta</li>
+  </ul>
+  <a href="https://www.jollibee.com.ph/menu"><button>Order now</button></a>
+  <h3>Over <strong style="color: gold;">40035</strong> winners</h3>
+  
+</details>
+
+      <!-- Desktop content -->
+      <div class="desktop-sidebar-content">
+        <h2>50% sale!!!</h2>
+        <ul>
+          <li><img src="/static/1.jpg" alt="Chickenjoy">Chickenjoy</li>
+          <li><img src="/static/3.jpg" alt="Spaghetti">Jolly Spaghetti</li>
+          <li><img src="/static/2.jpg" alt="Burger Steak">Burger Steak</li>
+          <li><img src="/static/4.jpg" alt="Yumburger">Yumburger</li>
+          <li><img src="/static/5.jpg" alt="Palabok">Palabok Fiesta</li>
+        </ul>
+        <a href="https://www.jollibee.com.ph/menu"><button>Order now</button></a>
+        <h3>Over <strong style="color: gold;">40035</strong> winners</h3>
+        <button onclick="playauido()"><p id="musicplay">play music</p></button>
+      </div>
+    </aside>
+  </div>
+
+  <div id="overlay">
+    <h2 id="message"></h2>
+    <img id="item-image" src="" alt="">
+    <button id="claim">Claim</button>
+  </div>
+
+  <footer>
+    &copy; 2025 Jollibee. All rights reserved.
+  </footer>
+
+  <audio id="bg-music" src="/static/music.mp3" autoplay loop></audio>
+
+
+</body>
+</html>

